@@ -9,7 +9,7 @@ pasta_fichas = r"Caminho\pastas"
 wb_geral = Workbook()
 ws_geral = wb_geral.active
 ws_geral.title = "Reeducandos"
-ws_geral.append(["Nome", "CPF", "Telefone", "Frequência", "Arquivo Origem"])
+ws_geral.append(["Nome", "CPF", "Telefone", "Dia", "Frequência", "Arquivo Origem"])
 
 for nome_arquivo in os.listdir(pasta_fichas):
     if nome_arquivo.endswith(".xlsx") and not nome_arquivo.startswith("~$"):
@@ -22,6 +22,7 @@ for nome_arquivo in os.listdir(pasta_fichas):
             nome = ws["B4"].value
             cpf = ws["G5"].value
             telefone = ws["B8"].value
+            dia = ws["G12"].value
 
             # Frequência
             frequencia = "Não informado"
@@ -36,7 +37,7 @@ for nome_arquivo in os.listdir(pasta_fichas):
                 elif re.search(r"\(\s*X\s*\)\s*OUTROS", freq_upper):
                     frequencia = "Outro"
 
-            ws_geral.append([nome, cpf, telefone, frequencia, nome_arquivo])
+            ws_geral.append([nome, cpf, telefone, dia, frequencia, nome_arquivo])
 
         except Exception as e:
             print(f"Erro ao processar {nome_arquivo}: {e}")
